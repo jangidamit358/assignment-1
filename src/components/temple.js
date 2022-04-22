@@ -7,16 +7,17 @@ import { LoadingWrapper } from "./loading/LoadingWrapper";
 import { Dot } from "./loading/Dot";
 import { Pagination } from "./pagination";
 export default function Temple() {
-  const [data, setData] = useState([]);
-  const [page, setpage] = useState(4);
+   const [data, setData] = useState([]);
+  const [page, setpage] = useState(60);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
       .get(
-        `https://meesho-clone-123.herokuapp.com/proudcts?page=${page}&size=15`
+        `https://fake-rjson-server-pro.herokuapp.com/products`
       )
       .then((data) => {
-        setData(data.data.product);
+        setData(data.data.slice(page, 15+page));
+        // console.log(data.data)
         setLoading(false);
       });
   }, [page]);
