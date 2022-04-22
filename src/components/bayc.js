@@ -8,15 +8,16 @@ import { Dot } from "./loading/Dot";
 import { Pagination } from "./pagination";
 export default function Baync() {
   const [data, setData] = useState([]);
-  const [page, setpage] = useState(7);
+  const [page, setpage] = useState(16);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
       .get(
-        `https://meesho-clone-123.herokuapp.com/proudcts?page=${page}&size=15`
+        `https://fake-rjson-server-pro.herokuapp.com/products`
       )
       .then((data) => {
-        setData(data.data.product);
+        setData(data.data.slice(page, 15+page));
+        // console.log(data.data)
         setLoading(false);
       });
   }, [page]);
